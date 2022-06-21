@@ -5,12 +5,12 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-interface Renderer
+interface Renderer_
 {
   void renderCircle(float radius);
 }
 
-class VectorRenderer implements Renderer
+class VectorRenderer_ implements Renderer_
 {
   @Override
   public void renderCircle(float radius)
@@ -19,7 +19,7 @@ class VectorRenderer implements Renderer
   }
 }
 
-class RasterRenderer implements Renderer
+class RasterRenderer_ implements Renderer_
 {
   @Override
   public void renderCircle(float radius)
@@ -28,11 +28,11 @@ class RasterRenderer implements Renderer
   }
 }
 
-abstract class Shape
+abstract class Shape_
 {
-  protected Renderer renderer;
+  protected Renderer_ renderer;
 
-  public Shape(Renderer renderer)
+  public Shape_(Renderer_ renderer)
   {
     this.renderer = renderer;
   }
@@ -41,17 +41,17 @@ abstract class Shape
   public abstract void resize(float factor);
 }
 
-class Circle extends Shape
+class Circle extends Shape_
 {
   public float radius;
 
   @Inject
-  public Circle(Renderer renderer)
+  public Circle(Renderer_ renderer)
   {
     super(renderer);
   }
 
-  public Circle(Renderer renderer, float radius)
+  public Circle(Renderer_ renderer, float radius)
   {
     super(renderer);
     this.radius = radius;
@@ -75,7 +75,7 @@ class ShapeModule extends AbstractModule
   @Override
   protected void configure()
   {
-    bind(Renderer.class).to(VectorRenderer.class);
+    bind(Renderer_.class).to(VectorRenderer_.class);
   }
 }
 
@@ -83,8 +83,8 @@ class BridgeDemo
 {
   public static void main(String[] args)
   {
-//    RasterRenderer rasterRenderer = new RasterRenderer();
-//    VectorRenderer vectorRenderer = new VectorRenderer();
+//    RasterRenderer_ rasterRenderer = new RasterRenderer_();
+//    VectorRenderer_ vectorRenderer = new VectorRenderer_();
 //    Circle circle = new Circle(vectorRenderer, 5);
 //    circle.draw();
 //    circle.resize(2);
